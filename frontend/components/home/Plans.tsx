@@ -58,14 +58,14 @@ export default function PlansSection() {
       <div className="space-y-8 px-5 py-16 md:px-10">
         <div className="flex flex-col gap-3">
           <div className="max-w-3xl">
-            <p className="text-text-muted text-sm font-medium tracking-[0.3em] uppercase">
+            <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
               Тарифи
             </p>
-            <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
+            <h2 className="text-text mt-4 text-4xl font-semibold sm:text-5xl">
               Три плани без перевантаження опціями.
             </h2>
           </div>
-          <p className="text-text-muted max-w-xl text-base leading-7">
+          <p className="text-text-muted max-w-xl leading-7">
             Без заплутаних пакетів і прихованих доплат. Ви одразу бачите,
             скільки платите, яку швидкість отримуєте і для якого сценарію
             підійде кожен тариф
@@ -107,7 +107,7 @@ export default function PlansSection() {
                 <p className="text-text-muted pb-1 text-sm">грн / міс</p>
               </div>
 
-              <div className="border-border/25 bg-secondary/25 rounded-3xl border px-5 py-4">
+              <div className="border-border/50 bg-secondary/50 rounded-3xl border px-5 py-4">
                 <p className="text-text-muted text-sm tracking-widest uppercase">
                   Швидкість
                 </p>
@@ -152,7 +152,7 @@ export default function PlansSection() {
                 className="border-border bg-foreground rounded-[1.75rem] border p-6"
               >
                 <div className="flex items-start gap-4">
-                  <div className="border-border/25 bg-secondary/50 text-text-muted flex h-10 w-10 items-center justify-center rounded-xl border">
+                  <div className="border-border/50 bg-secondary/50 text-text-muted flex h-10 w-10 items-center justify-center rounded-xl border">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div>

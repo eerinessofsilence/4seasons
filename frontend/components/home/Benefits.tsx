@@ -44,11 +44,11 @@ export default function BenefitsSection() {
     <section className="border-border border-b">
       <div className="px-5 py-16 md:px-10">
         <div className="flex justify-end">
-          <div className="max-w-2xl text-right">
-            <p className="text-text-muted text-sm font-semibold tracking-[0.3em] uppercase">
+          <div className="max-w-3xl text-right">
+            <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
               Чому нас обирають
             </p>
-            <h2 className="text-text mt-2 text-3xl font-semibold sm:text-4xl">
+            <h2 className="text-text mt-2 text-4xl font-semibold lg:text-5xl">
               Інтернет для дому, де завжди багато онлайн-життя
             </h2>
             <p className="text-text-muted mt-3 text-base leading-7">
@@ -72,7 +72,7 @@ export default function BenefitsSection() {
 
                 <div className="relative z-10">
                   <div className="flex items-center gap-2">
-                    <div className="border-border/25 bg-secondary/50 text-text-muted flex h-10 w-10 shrink-0 flex-nowrap items-center justify-center rounded-xl border">
+                    <div className="border-border/50 bg-secondary/50 text-text-muted flex h-10 w-10 shrink-0 flex-nowrap items-center justify-center rounded-xl border">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="text-text text-lg font-medium">

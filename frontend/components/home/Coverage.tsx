@@ -41,11 +41,11 @@ export default function CoverageSection() {
                   className="border-border bg-foreground rounded-[1.75rem] border p-5"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="border-border/25 bg-secondary/50 text-text-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border">
+                    <div className="border-border/50 bg-secondary/50 text-text-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border">
                       <Icon className="h-6 w-6" />
                     </div>
                     <div className="space-y-4">
-                      <h3 className="text-text text-xl font-semibold">
+                      <h3 className="text-text text-xl font-medium">
                         {step.title}
                       </h3>
                       <p className="text-text-muted leading-6">{step.text}</p>
@@ -62,10 +62,10 @@ export default function CoverageSection() {
               boxShadow: "var(--shadow)",
             }}
           >
-            <p className="text-text-muted text-sm font-semibold tracking-[0.3em] uppercase">
-              Покриття 4Seasons
+            <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
+              Покриття
             </p>
-            <h2 className="text-text mt-4 text-3xl font-semibold sm:text-4xl">
+            <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
               Перевіримо, чи доступне підключення за вашою адресою
             </h2>
             <p className="text-text-muted mt-4 text-base leading-7">
@@ -77,7 +77,7 @@ export default function CoverageSection() {
               {coverageAreas.map((area) => (
                 <span
                   key={area}
-                  className="border-border bg-background text-text rounded-full border px-2 py-1 text-sm"
+                  className="border-border bg-background text-text rounded-full border px-1.5 py-px text-sm"
                 >
                   {area}
                 </span>
@@ -86,7 +86,7 @@ export default function CoverageSection() {
 
             <a
               href="#support"
-              className="text-text hover:text-highlight mt-8 inline-flex items-center gap-2 text-sm font-semibold transition"
+              className="text-text hover:text-highlight mt-8 inline-flex items-center gap-2 text-sm font-medium transition"
             >
               Залишити адресу
               <ArrowRight className="h-4 w-4" />

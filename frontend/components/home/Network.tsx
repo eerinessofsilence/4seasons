@@ -25,7 +25,7 @@ export default function Network() {
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div className="space-y-8 lg:sticky lg:top-20">
             <div className="flex flex-col space-y-5">
-              <h2 className="text-text max-w-3xl text-4xl leading-[1.2] font-semibold sm:text-5xl lg:text-6xl">
+              <h2 className="text-text max-w-3xl text-4xl leading-[1.2] font-semibold lg:text-5xl">
                 Технології, які відчуваються щодня
               </h2>
               <p className="text-text-muted max-w-2xl text-base leading-7 sm:text-lg">
@@ -38,10 +38,10 @@ export default function Network() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="#coverage"
-                className="bg-text text-background hover:bg-highlight inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition"
+                className="bg-text text-background hover:bg-highlight inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition"
               >
                 Перевірити адресу
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -55,10 +55,10 @@ export default function Network() {
           >
             <div className="space-y-6">
               <div className="space-y-2">
-                <p className="text-text-muted text-sm font-semibold tracking-[0.25em] uppercase">
+                <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
                   Що ви отримаєте
                 </p>
-                <h2 className="text-text text-2xl font-semibold sm:text-3xl">
+                <h2 className="text-text text-3xl font-medium sm:text-4xl">
                   Мережу, яка витримує домашній ритм.
                 </h2>
               </div>
@@ -77,7 +77,7 @@ export default function Network() {
                           <Icon className="h-5 w-5" />
                         </div>
                         <div>
-                          <h3 className="text-text text-lg font-semibold">
+                          <h3 className="text-text text-lg font-medium">
                             {pillar.title}
                           </h3>
                           <p className="text-text-muted mt-2 text-sm leading-6">
