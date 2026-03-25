@@ -12,6 +12,13 @@ const plans = [
       "Підійде для 2-3 пристроїв",
       "Підтримка щодня",
     ],
+    comparison: {
+      bestFor: "Серфінг, месенджери та відео без високого навантаження",
+      devices: "2-3 пристрої",
+      streaming: "YouTube, відеодзвінки, HD-стрімінг",
+      support: "Щодня",
+      traffic: "Безлімітний",
+    },
   },
   {
     name: "Родина",
@@ -24,6 +31,13 @@ const plans = [
       "4K, IPTV та відеодзвінки",
       "Найкращий баланс ціни і швидкості",
     ],
+    comparison: {
+      bestFor: "Квартири, де одночасно працюють, навчаються і дивляться 4K",
+      devices: "5-8 пристроїв",
+      streaming: "4K, IPTV, Zoom і робота без просідань",
+      support: "Щодня",
+      traffic: "Безлімітний",
+    },
     featured: true,
   },
   {
@@ -36,6 +50,43 @@ const plans = [
       "Підійде для NAS, консолей і камер",
       "Пріоритетна підтримка",
     ],
+    comparison: {
+      bestFor: "Великі доми, стрімінг, камери та техніка, що постійно онлайн",
+      devices: "8+ пристроїв",
+      streaming: "4K/8K, консолі, NAS і важкі сценарії",
+      support: "Пріоритетна",
+      traffic: "Безлімітний",
+    },
+  },
+];
+
+const comparisonGridClass =
+  "grid grid-cols-[minmax(12rem,1.15fr)_repeat(3,minmax(11rem,1fr))] gap-4 md:gap-6";
+
+const comparisonRows = [
+  {
+    label: "Швидкість",
+    values: plans.map((plan) => plan.speed),
+  },
+  {
+    label: "Для кого",
+    values: plans.map((plan) => plan.comparison.bestFor),
+  },
+  {
+    label: "Кількість пристроїв",
+    values: plans.map((plan) => plan.comparison.devices),
+  },
+  {
+    label: "Стрімінг і робота",
+    values: plans.map((plan) => plan.comparison.streaming),
+  },
+  {
+    label: "Підтримка",
+    values: plans.map((plan) => plan.comparison.support),
+  },
+  {
+    label: "Трафік",
+    values: plans.map((plan) => plan.comparison.traffic),
   },
 ];
 
@@ -140,6 +191,51 @@ export default function PlansSection() {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="border-border/50 bg-secondary/25 mt-8 overflow-hidden rounded-4xl border">
+          <div className="overflow-x-auto overscroll-contain">
+            <div className="min-w-200">
+              <div
+                className={`${comparisonGridClass} text-text-muted/75 border-border/50 items-end border-b px-5 py-4 text-sm md:px-6`}
+              >
+                <p className="text-lg font-medium tracking-widest uppercase">
+                  Порівняння
+                </p>
+                {plans.map((plan) => (
+                  <p
+                    key={plan.name}
+                    className="text-text text-lg font-medium uppercase"
+                  >
+                    {plan.name}
+                  </p>
+                ))}
+              </div>
+
+              {comparisonRows.map((row, index) => (
+                <div
+                  key={row.label}
+                  className={`${comparisonGridClass} items-start px-5 py-5 md:px-6 ${
+                    index < comparisonRows.length - 1
+                      ? "border-border/25 border-b"
+                      : ""
+                  }`}
+                >
+                  <p className="text-text/90 pr-3 text-sm leading-6 font-semibold md:text-base">
+                    {row.label}
+                  </p>
+                  {row.values.map((value, valueIndex) => (
+                    <p
+                      key={`${row.label}-${plans[valueIndex]?.name}`}
+                      className="text-text-muted text-sm leading-6 text-pretty md:text-base"
+                    >
+                      {value}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
