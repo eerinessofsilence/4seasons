@@ -29,7 +29,7 @@ export default function Hero() {
           <div className="flex flex-col items-center text-center">
             <h1 className="text-text max-w-3xl text-7xl font-semibold tracking-tight">
               Домашній інтернет
-              <span className="block text-[#ff9f1a]">без просідань</span>
+              <span className="text-highlight block">без просідань</span>
             </h1>
 
             <p className="text-text-muted mt-5 max-w-2xl text-lg leading-8 sm:text-xl">
