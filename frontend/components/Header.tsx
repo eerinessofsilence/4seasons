@@ -2,10 +2,10 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navItems = [
+  { href: "#network", label: "Мережа" },
   { href: "#plans", label: "Тарифи" },
   { href: "#coverage", label: "Покриття" },
-  { href: "#faq", label: "Питання" },
-  { href: "#support", label: "Контакти" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export default function Header() {
@@ -32,10 +32,10 @@ export default function Header() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href="#plans"
+            href="#coverage"
             className="bg-foreground text-text border-border/50 hover:bg-secondary inline-flex items-center gap-2 rounded-full border px-4 py-2 font-semibold transition-all duration-200"
           >
-            Підключити інтернет
+            Перевірити адресу
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>

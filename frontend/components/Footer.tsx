@@ -2,11 +2,12 @@ import { Clock3, Mail, MapPin, Phone } from "lucide-react";
 
 const footerGroups = [
   {
-    title: "Послуги",
+    title: "Розділи",
     links: [
+      { href: "#network", label: "Мережа" },
       { href: "#plans", label: "Тарифи" },
       { href: "#coverage", label: "Покриття" },
-      { href: "#support", label: "Підтримка" },
+      { href: "#faq", label: "FAQ" },
     ],
   },
   {
@@ -14,7 +15,7 @@ const footerGroups = [
     links: [
       { href: "#coverage", label: "Як підключитися" },
       { href: "#faq", label: "Питання та відповіді" },
-      { href: "#support", label: "Залишити заявку" },
+      { href: "#support", label: "Консультація" },
     ],
   },
 ];
@@ -40,8 +41,8 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-text-muted max-w-sm text-sm leading-6">
-              Підключаємо швидко, допомагаємо з обладнанням і тримаємо сервіс на
-              зв&apos;язку щодня.
+              Швидко підключаємо, допомагаємо з обладнанням і залишаємося на
+              зв&apos;язку після монтажу.
             </p>
           </div>
 
@@ -97,7 +98,7 @@ export default function Footer() {
 
         <div className="border-border text-text-muted mt-6 flex flex-col gap-3 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © 2026 4Seasons. Домашній інтернет, який працює без зайвого шуму.
+            © 2026 4Seasons. Домашній інтернет для спокійного щоденного ритму.
           </p>
           <div className="flex gap-4">
             <a href="#hero" className="hover:text-text transition">
