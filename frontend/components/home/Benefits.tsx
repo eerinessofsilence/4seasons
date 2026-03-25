@@ -42,7 +42,7 @@ const benefits: BenefitItem[] = [
 export default function BenefitsSection() {
   return (
     <section className="border-border border-b">
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 lg:px-10">
+      <div className="px-5 py-16 md:px-10">
         <div className="flex justify-end">
           <div className="max-w-2xl text-right">
             <p className="text-text-muted text-sm font-semibold tracking-[0.3em] uppercase">
@@ -72,7 +72,7 @@ export default function BenefitsSection() {
 
                 <div className="relative z-10">
                   <div className="flex items-center gap-2">
-                    <div className="border-border/50 bg-secondary/50 text-text-muted flex h-10 w-10 shrink-0 flex-nowrap items-center justify-center rounded-xl border">
+                    <div className="border-border/25 bg-secondary/50 text-text-muted flex h-10 w-10 shrink-0 flex-nowrap items-center justify-center rounded-xl border">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="text-text text-lg font-medium">

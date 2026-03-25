@@ -3,14 +3,14 @@ import LineWaves from "../ui/LineWaves";
 
 export default function Hero() {
   return (
-    <section id="hero" className="border-border container border-b p-5">
+    <section id="hero" className="border-border border-b px-5 py-16 md:px-10">
       <div className="border-border relative overflow-hidden rounded-4xl border">
-        <div className="absolute inset-0 opacity-60">
+        <div className="absolute inset-0 opacity-50">
           <LineWaves
             speed={0.05}
             innerLineCount={15}
             outerLineCount={30}
-            warpIntensity={1}
+            warpIntensity={0.5}
             rotation={-15}
             edgeFadeWidth={0}
             colorCycleSpeed={1}
@@ -27,15 +27,14 @@ export default function Hero() {
 
         <div className="relative z-10 flex flex-col gap-10 p-10">
           <div className="flex flex-col items-center text-center">
-            <h1 className="text-text max-w-3xl text-7xl font-semibold tracking-tight">
+            <h1 className="text-text max-w-3xl text-5xl font-semibold tracking-tight md:text-6xl lg:text-7xl">
               Домашній інтернет
               <span className="text-highlight block">без просідань</span>
             </h1>
 
-            <p className="text-text-muted mt-5 max-w-2xl text-lg leading-8 sm:text-xl">
+            <p className="text-text-muted mt-5 max-w-2xl text-lg md:leading-8 lg:text-xl">
               Для роботи, навчання, 4K і ігор одночасно. Підключаємо за 1-2 дні,
-              допомагаємо з роутером і залишаємося на зв&apos;язку після
-              монтажу.
+              допомагаємо з роутером і залишаємося на зв&apos;язку після монтажу
             </p>
           </div>
 

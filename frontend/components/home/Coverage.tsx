@@ -29,7 +29,7 @@ const steps = [
 export default function CoverageSection() {
   return (
     <section id="coverage" className="border-border border-b">
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 lg:px-10">
+      <div className="px-5 py-16 md:px-10">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="grid gap-4">
             {steps.map((step) => {
@@ -41,8 +41,8 @@ export default function CoverageSection() {
                   className="border-border bg-foreground rounded-[1.75rem] border p-5"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="border-border bg-background text-text flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border">
-                      <Icon className="h-5 w-5" />
+                    <div className="border-border/25 bg-secondary/50 text-text-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border">
+                      <Icon className="h-6 w-6" />
                     </div>
                     <div className="space-y-4">
                       <h3 className="text-text text-xl font-semibold">

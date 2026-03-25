@@ -21,17 +21,17 @@ const servicePillars = [
 export default function Network() {
   return (
     <section id="network" className="border-border border-b">
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 lg:px-10">
+      <div className="px-5 py-16 md:px-10">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <div className="sticky top-16 space-y-8">
-            <div className="space-y-5">
+          <div className="space-y-8 lg:sticky lg:top-20">
+            <div className="flex flex-col space-y-5">
               <h2 className="text-text max-w-3xl text-4xl leading-[1.2] font-semibold sm:text-5xl lg:text-6xl">
-                Технології, які відчуваються щодня.
+                Технології, які відчуваються щодня
               </h2>
               <p className="text-text-muted max-w-2xl text-base leading-7 sm:text-lg">
                 Стабільне підключення, запас швидкості для телевізора й консолей
                 та готовність мережі до навантаження у вечірні години, коли
-                вдома всі онлайн одночасно.
+                вдома всі онлайн одночасно
               </p>
             </div>
 
@@ -73,7 +73,7 @@ export default function Network() {
                       className="border-border bg-background rounded-3xl border p-5"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="border-border bg-foreground text-text flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border">
+                        <div className="border-border/50 bg-secondary/50 text-text-muted flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
                           <Icon className="h-5 w-5" />
                         </div>
                         <div>

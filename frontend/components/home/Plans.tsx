@@ -55,20 +55,20 @@ const extras = [
 export default function PlansSection() {
   return (
     <section id="plans" className="border-border border-b">
-      <div className="mx-auto max-w-6xl space-y-8 py-16">
+      <div className="space-y-8 px-5 py-16 md:px-10">
         <div className="flex flex-col gap-3">
           <div className="max-w-3xl">
-            <p className="text-text-muted text-sm font-semibold tracking-[0.3em] uppercase">
+            <p className="text-text-muted text-sm font-medium tracking-[0.3em] uppercase">
               Тарифи
             </p>
-            <h2 className="text-text mt-4 text-3xl font-semibold sm:text-4xl">
+            <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
               Три плани без перевантаження опціями.
             </h2>
           </div>
           <p className="text-text-muted max-w-xl text-base leading-7">
             Без заплутаних пакетів і прихованих доплат. Ви одразу бачите,
             скільки платите, яку швидкість отримуєте і для якого сценарію
-            підійде кожен тариф.
+            підійде кожен тариф
           </p>
         </div>
 
@@ -103,7 +103,7 @@ export default function PlansSection() {
               </div>
 
               <div className="flex items-end gap-2">
-                <p className="text-text text-4xl font-medium">{plan.price}</p>
+                <p className="text-text text-4xl font-semibold">{plan.price}</p>
                 <p className="text-text-muted pb-1 text-sm">грн / міс</p>
               </div>
 
@@ -122,7 +122,7 @@ export default function PlansSection() {
                     key={feature}
                     className="text-text-muted flex items-center gap-3 text-sm"
                   >
-                    <span className="border-border/25 bg-secondary/25 text-highlight/90 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border">
+                    <span className="border-border/25 bg-secondary/50 text-highlight/90 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border">
                       <Check className="h-3.5 w-3.5" />
                     </span>
                     {feature}
@@ -152,11 +152,11 @@ export default function PlansSection() {
                 className="border-border bg-foreground rounded-[1.75rem] border p-6"
               >
                 <div className="flex items-start gap-4">
-                  <div className="border-border bg-background text-text flex h-12 w-12 items-center justify-center rounded-2xl border">
+                  <div className="border-border/25 bg-secondary/50 text-text-muted flex h-10 w-10 items-center justify-center rounded-xl border">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-text text-lg font-semibold">
+                    <h3 className="text-text text-lg font-medium">
                       {extra.title}
                     </h3>
                     <p className="text-text-muted mt-2 text-sm leading-6">

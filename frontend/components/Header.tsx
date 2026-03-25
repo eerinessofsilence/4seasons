@@ -11,7 +11,7 @@ const navItems = [
 export default function Header() {
   return (
     <header className="border-border bg-background sticky top-0 z-50 border-b">
-      <div className="container flex items-center justify-between px-5 py-3">
+      <div className="flex items-center justify-between px-5 py-3 md:px-10">
         <Link to="/" className="flex items-center gap-3">
           <div>
             <p className="text-text text-xl font-semibold">4Seasons</p>

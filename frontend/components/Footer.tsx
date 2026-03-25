@@ -23,9 +23,9 @@ const footerGroups = [
 export default function Footer() {
   return (
     <footer className="border-border bg-background border-t">
-      <div className="p-5">
+      <div className="px-5 py-8 md:px-10">
         <div
-          className="border-border grid gap-8 rounded-4xl border p-8 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]"
+          className="border-border grid grid-cols-1 gap-6 rounded-3xl border p-8 md:grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr]"
           style={{
             backgroundImage: "var(--gradient)",
             boxShadow: "var(--shadow)",
@@ -34,8 +34,8 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div>
-                <p className="text-text text-base font-semibold">4Seasons</p>
-                <p className="text-text/90 text-sm">
+                <p className="text-text font-medium">4Seasons</p>
+                <p className="text-text/80">
                   Домашній інтернет в Одесі та передмісті
                 </p>
               </div>
