@@ -14,9 +14,9 @@ export default function Hero() {
           edgeFadeWidth={0}
           colorCycleSpeed={1}
           brightness={0.25}
-          color1="#666666"
-          color2="#222222"
-          color3="#444444"
+          color1="#444444"
+          color2="#666666"
+          color3="#888888"
           enableMouseInteraction
           mouseInfluence={2}
         />

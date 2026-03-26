@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Mail, Menu, Phone, X } from "lucide-react";
+import { ArrowRight, Mail, Menu, Moon, Phone, Sun, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
@@ -22,6 +22,26 @@ const contactItems = [
   },
 ];
 
+const THEME_STORAGE_KEY = "4seasons-theme";
+
+function getInitialIsLightTheme() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+
+  if (savedTheme === "light") {
+    return true;
+  }
+
+  if (savedTheme === "dark") {
+    return false;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: light)").matches;
+}
+
 function getFocusableElements(container: HTMLElement) {
   return Array.from(
     container.querySelectorAll<HTMLElement>(
@@ -33,6 +53,7 @@ function getFocusableElements(container: HTMLElement) {
 export default function Header() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(getInitialIsLightTheme);
   const [activeHash, setActiveHash] = useState(() =>
     typeof window === "undefined" ? "" : window.location.hash,
   );
@@ -41,6 +62,7 @@ export default function Header() {
   const panelRef = useRef<HTMLDivElement>(null);
 
   const openMobileMenu = () => setIsMobileMenuOpen(true);
+  const toggleTheme = () => setIsLightTheme((currentValue) => !currentValue);
 
   const closeMobileMenu = (restoreFocus = false) => {
     setIsMobileMenuOpen(false);
@@ -51,6 +73,14 @@ export default function Header() {
       });
     }
   };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("light", isLightTheme);
+    window.localStorage.setItem(
+      THEME_STORAGE_KEY,
+      isLightTheme ? "light" : "dark",
+    );
+  }, [isLightTheme]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -145,10 +175,10 @@ export default function Header() {
   return (
     <header className="border-border bg-foreground sticky top-0 z-50 border-b backdrop-blur">
       <div className="relative px-5 py-3 md:px-10">
-        <div className="flex items-center justify-between gap-4">
+        <div className="grid grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
           <Link
             to="/"
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 lg:justify-self-start"
             onClick={() => closeMobileMenu()}
           >
             <div>
@@ -156,7 +186,7 @@ export default function Header() {
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center justify-center gap-8 lg:flex lg:justify-self-center">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -168,34 +198,66 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-3 lg:flex">
-            <a
-              href="#coverage"
-              className="bg-foreground text-text border-border/50 hover:bg-secondary inline-flex items-center gap-2 rounded-full border px-4 py-2 font-semibold transition-all duration-200"
+          <div className="flex items-center justify-self-end gap-3">
+            <button
+              type="button"
+              role="switch"
+              aria-checked={isLightTheme}
+              aria-label={
+                isLightTheme ? "Switch to dark theme" : "Switch to light theme"
+              }
+              onClick={toggleTheme}
+              className="border-border/50 bg-foreground relative inline-flex h-10 w-20 shrink-0 cursor-pointer items-center rounded-full border px-1.5 shadow-inner transition-all duration-200 active:scale-[0.97]"
             >
-              Перевірити адресу
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
+              <span className="pointer-events-none relative z-10 grid w-full grid-cols-2 place-items-center">
+                <Sun
+                  className={`h-4 w-4 transition-colors duration-200 ${
+                    isLightTheme ? "text-text" : "text-text-muted/55"
+                  }`}
+                />
+                <Moon
+                  className={`h-4 w-4 transition-colors duration-200 ${
+                    isLightTheme ? "text-text-muted" : "text-text"
+                  }`}
+                />
+              </span>
+              <span
+                aria-hidden="true"
+                className={`border-border bg-secondary absolute top-0.75 left-1.5 h-8 w-8 rounded-full border shadow-sm transition-transform duration-300 ${
+                  isLightTheme ? "translate-x-[0.5px]" : "translate-x-[33.5px]"
+                }`}
+              />
+            </button>
 
-          <button
-            ref={triggerRef}
-            type="button"
-            className="border-border bg-foreground text-text hover:bg-secondary relative inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 lg:hidden"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu-panel"
-            aria-haspopup="dialog"
-            aria-label={isMobileMenuOpen ? "Закрити меню" : "Відкрити меню"}
-            onClick={() =>
-              isMobileMenuOpen ? closeMobileMenu(true) : openMobileMenu()
-            }
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
+            <div className="hidden items-center gap-3 lg:flex">
+              <a
+                href="#coverage"
+                className="bg-foreground text-text border-border/50 hover:bg-secondary inline-flex items-center gap-2 rounded-full border px-4 py-2 font-semibold transition-all duration-200"
+              >
+                Перевірити адресу
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+
+            <button
+              ref={triggerRef}
+              type="button"
+              className="border-border bg-foreground text-text hover:bg-secondary relative inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 lg:hidden"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu-panel"
+              aria-haspopup="dialog"
+              aria-label={isMobileMenuOpen ? "Закрити меню" : "Відкрити меню"}
+              onClick={() =>
+                isMobileMenuOpen ? closeMobileMenu(true) : openMobileMenu()
+              }
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
 
         <div

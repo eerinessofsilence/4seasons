@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --font-sans: "Inter", system-ui, sans-serif;
   --bg-dark: oklch(0% 0 0);
@@ -11,7 +13,20 @@
   --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
   --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
   --highlight: oklch(0.78 0.19 67);
-  --border-card: solid 1px var(--border);
+  --shadow: 0px 2px 2px oklch(0% 0 0 / 0.07), 0px 4px 4px oklch(0% 0 0 / 0.15);
+}
+
+.light {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --bg-dark: oklch(90% 0 0);
+  --bg: oklch(95% 0 0);
+  --bg-light: oklch(100% 0 0);
+  --text: oklch(15% 0 0);
+  --text-muted: oklch(35% 0 0);
+  --border: oklch(40% 0 0);
+  --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+  --highlight: oklch(0.78 0.19 67);
   --shadow: 0px 2px 2px oklch(0% 0 0 / 0.07), 0px 4px 4px oklch(0% 0 0 / 0.15);
 }
 
@@ -34,6 +49,10 @@
     scroll-behavior: smooth;
     font-size: 16px;
     color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
   }
 
   body {
