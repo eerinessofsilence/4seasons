@@ -36,7 +36,7 @@ export default function Footer() {
               <div>
                 <p className="text-text font-medium">4Seasons</p>
                 <p className="text-text/80">
-                  Домашній інтернет в Одесі та передмісті
+                  Домашній інтернет у Голосіївському районі Києва
                 </p>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function Footer() {
               </a>
               <p className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                Одеса та передмістя
+                Голосіївський район, Київ
               </p>
               <p className="flex items-start gap-3">
                 <Clock3 className="mt-0.5 h-4 w-4 shrink-0" />
