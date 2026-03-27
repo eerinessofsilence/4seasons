@@ -1,28 +1,31 @@
-import { ArrowRight, MapIcon, Wifi } from "lucide-react";
-import LineWaves from "../ui/LineWaves";
+import { ArrowRight, Wifi } from "lucide-react";
+import SoftAurora from "../ui/SoftAurora";
 
 export default function Hero() {
   return (
-    <section id="hero" className="border-border border-b px-5 py-16 md:px-10">
+    <section
+      id="hero"
+      className="relative min-h-screen px-5 py-12 pt-32 md:px-10 md:py-24 md:pt-36"
+    >
       <div className="absolute inset-0 opacity-50">
-        <LineWaves
-          speed={0.05}
-          innerLineCount={15}
-          outerLineCount={30}
-          warpIntensity={0.25}
-          rotation={-15}
-          edgeFadeWidth={0}
-          colorCycleSpeed={1}
-          brightness={0.25}
-          color1="#444444"
-          color2="#666666"
-          color3="#888888"
-          enableMouseInteraction
-          mouseInfluence={2}
+        <SoftAurora
+          speed={0.2}
+          scale={1.5}
+          brightness={0.5}
+          color1="#E69A00"
+          color2="#CC8800"
+          noiseFrequency={1}
+          noiseAmplitude={2}
+          bandHeight={0.5}
+          bandSpread={1}
+          octaveDecay={0.1}
+          layerOffset={0}
+          colorSpeed={0.5}
+          enableMouseInteraction={false}
         />
       </div>
 
-      <div className="relative z-10 flex flex-col gap-10">
+      <div className="relative z-10 flex flex-col gap-16">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-text max-w-3xl text-5xl font-semibold tracking-tight md:text-6xl lg:text-7xl">
             Домашній інтернет
@@ -34,28 +37,18 @@ export default function Hero() {
             допомагаємо з роутером і залишаємося на зв&apos;язку після монтажу
           </p>
         </div>
-
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
+        <div className="flex flex-row justify-center">
           <a
             href="#plans"
-            className="text-background bg-text hover:bg-text-muted inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-lg font-medium transition-colors duration-200"
+            className="hero-cta inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xl font-medium"
           >
-            Підібрати тариф
-            <ArrowRight className="h-5 w-5" />
-          </a>
-
-          <a
-            href="#coverage"
-            className="border-border bg-secondary/50 text-text hover:bg-secondary/75 inline-flex items-center justify-center gap-2 rounded-2xl border px-6 py-3 text-xl font-medium backdrop-blur-lg transition-colors duration-200"
-          >
-            <MapIcon className="text-text h-6 w-6" />
-            Перевірити адресу
+            Підібрати тариф за хвилину
+            <ArrowRight className="h-5 w-5 stroke-[2.5px]" />
           </a>
         </div>
-
-        <div className="mt-8 flex justify-center">
-          <div className="border-border/50 bg-foreground text-text-muted inline-flex items-center gap-3 rounded-full border px-4 py-2 text-sm backdrop-blur-sm">
-            <Wifi className="h-4 w-4" />
+        <div className="flex justify-center">
+          <div className="border-border/50 bg-foreground text-text-muted inline-flex items-center gap-3 rounded-full border px-3 py-1 text-sm backdrop-blur-sm">
+            <Wifi className="h-5 w-5" />
             Від 299 грн на місяць / до 1 Гбіт/с
           </div>
         </div>
