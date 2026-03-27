@@ -24,7 +24,7 @@ export default function SupportSection() {
 
   return (
     <section id="faq">
-      <div className="px-5 py-16 md:px-10">
+      <div className="px-5 py-12 md:px-10 md:py-24">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
@@ -92,10 +92,6 @@ export default function SupportSection() {
           <aside
             id="support"
             className="border-border flex flex-col justify-between gap-8 rounded-4xl border p-5"
-            style={{
-              backgroundImage: "var(--gradient)",
-              boxShadow: "var(--shadow)",
-            }}
           >
             <div>
               <h3 className="text-text text-2xl font-semibold">

@@ -1,4 +1,4 @@
-import { ArrowRight, Router, Tv, Zap } from "lucide-react";
+import { MapIcon, Router, Tv, Zap } from "lucide-react";
 
 const servicePillars = [
   {
@@ -20,75 +20,71 @@ const servicePillars = [
 
 export default function Network() {
   return (
-    <section id="network" className="border-border border-b">
-      <div className="px-5 py-16 md:px-10">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <div className="space-y-8 lg:sticky lg:top-20">
-            <div className="flex flex-col space-y-5">
-              <h2 className="text-text max-w-3xl text-4xl leading-[1.2] font-semibold lg:text-5xl">
-                Технології, які відчуваються щодня
-              </h2>
-              <p className="text-text-muted max-w-2xl text-base leading-7 sm:text-lg">
-                Стабільне підключення, запас швидкості для телевізора й консолей
-                та готовність мережі до навантаження у вечірні години, коли
-                вдома всі онлайн одночасно
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#coverage"
-                className="bg-text text-background hover:bg-highlight inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition"
-              >
-                Перевірити адресу
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
+    <section id="network" className="px-5 py-12 md:px-10 md:py-24">
+      <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="space-y-8 lg:sticky lg:top-20">
+          <div className="flex flex-col space-y-5">
+            <h2 className="text-text max-w-3xl text-4xl leading-[1.2] font-semibold lg:text-5xl">
+              Технології, які відчуваються щодня
+            </h2>
+            <p className="text-text-muted max-w-2xl text-base leading-7 sm:text-lg">
+              Стабільне підключення, запас швидкості для телевізора й консолей
+              та готовність мережі до навантаження у вечірні години, коли вдома
+              всі онлайн одночасно
+            </p>
           </div>
 
-          <div
-            className="border-border rounded-4xl border p-6 sm:p-8"
-            style={{
-              backgroundImage: "var(--gradient)",
-              boxShadow: "var(--shadow)",
-            }}
+          <a
+            href="#coverage"
+            className="border-border bg-secondary/75 hover:text-text text-text-muted hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-lg font-medium backdrop-blur-lg transition-colors duration-200"
           >
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
-                  Що ви отримаєте
-                </p>
-                <h2 className="text-text text-3xl font-medium sm:text-4xl">
-                  Мережу, яка витримує домашній ритм.
-                </h2>
-              </div>
+            <MapIcon className="h-5 w-5" />
+            Перевірити адресу
+          </a>
+        </div>
 
-              <div className="space-y-4">
-                {servicePillars.map((pillar) => {
-                  const Icon = pillar.icon;
+        <div
+          className="border-border rounded-4xl border p-6 sm:p-8"
+          style={{
+            backgroundImage: "var(--gradient)",
+            boxShadow: "var(--shadow)",
+          }}
+        >
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
+                Що ви отримаєте
+              </p>
+              <h2 className="text-text text-3xl font-medium sm:text-4xl">
+                Мережу, яка витримує домашній ритм.
+              </h2>
+            </div>
 
-                  return (
-                    <div
-                      key={pillar.title}
-                      className="border-border bg-background rounded-3xl border p-5"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="border-border/50 bg-secondary/50 text-text-muted flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <h3 className="text-text text-lg font-medium">
-                            {pillar.title}
-                          </h3>
-                          <p className="text-text-muted mt-2 text-sm leading-6">
-                            {pillar.text}
-                          </p>
-                        </div>
+            <div className="space-y-4">
+              {servicePillars.map((pillar) => {
+                const Icon = pillar.icon;
+
+                return (
+                  <div
+                    key={pillar.title}
+                    className="border-border bg-background rounded-3xl border p-5"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="border-border/50 bg-secondary/50 text-highlight/75 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-text text-lg font-medium">
+                          {pillar.title}
+                        </h3>
+                        <p className="text-text-muted mt-2 text-sm leading-6">
+                          {pillar.text}
+                        </p>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

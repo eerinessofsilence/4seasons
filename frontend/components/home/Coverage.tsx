@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, MapPinned, ShieldEllipsis, Wrench } from "lucide-react";
+import { MapPinned, ShieldEllipsis, Wrench } from "lucide-react";
 
 type CoverageStreet = {
   id: string;
@@ -506,173 +506,168 @@ export default function CoverageSection() {
   }, [activeStreetId, mapStatus]);
 
   return (
-    <section id="coverage" className="border-border scroll-mt-28 border-b">
-      <div className="px-5 py-16 md:px-10">
-        <div className="grid gap-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <div className="grid gap-4">
-            {steps.map((step) => {
-              const Icon = step.icon;
+    <section id="coverage" className="space-y-12 px-5 py-12 md:px-10 md:py-24">
+      <div className="flex flex-col gap-3">
+        <div className="max-w-3xl">
+          <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
+            Покриття і підключення
+          </p>
+          <h2 className="text-text mt-4 text-4xl font-semibold sm:text-5xl">
+            Спочатку перевіряємо адресу, потім підключаємо без зайвих кроків.
+          </h2>
+        </div>
+        <p className="text-text-muted max-w-xl leading-7">
+          Зібрали карту покриття, показали будинки, які вже в роботі, і коротко
+          пояснили, як проходить підключення від перевірки адреси до монтажу.
+        </p>
+      </div>
 
-              return (
-                <article
-                  key={step.title}
-                  className="border-border bg-foreground rounded-[1.75rem] border p-5"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="border-border/50 bg-secondary/50 text-text-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <div className="space-y-4">
-                      <h3 className="text-text text-xl font-medium">
-                        {step.title}
-                      </h3>
-                      <p className="text-text-muted leading-6">{step.text}</p>
-                    </div>
+      <div className="grid gap-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+        <div className="grid gap-4">
+          {steps.map((step) => {
+            const Icon = step.icon;
+
+            return (
+              <article
+                key={step.title}
+                className="border-border bg-foreground rounded-[1.75rem] border p-5"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="border-border/50 bg-secondary/50 text-highlight/75 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
+                    <Icon className="h-5 w-5" />
                   </div>
-                </article>
-              );
-            })}
+                  <div className="space-y-4">
+                    <h3 className="text-text text-xl font-medium">
+                      {step.title}
+                    </h3>
+                    <p className="text-text-muted leading-6">{step.text}</p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="border-border bg-foreground h-full rounded-3xl border p-5">
+          <div>
+            <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
+              Покриття
+            </p>
+            <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
+              Працюємо в Голосіївському районі Києва
+            </h2>
+            <p className="text-text-muted mt-4 max-w-3xl text-base leading-7">
+              Підключаємо будинки на вказаних вулицях і швидко підкажемо, чи
+              доступне підключення саме за вашою адресою. Нижче зібрали карту
+              покриття та список будинків, які вже в роботі.
+            </p>
           </div>
 
-          <div className="border-border bg-foreground h-full rounded-3xl border p-5">
-            <div>
-              <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
-                Покриття
-              </p>
-              <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
-                Працюємо в Голосіївському районі Києва
-              </h2>
-              <p className="text-text-muted mt-4 max-w-3xl text-base leading-7">
-                Підключаємо будинки на вказаних вулицях і швидко підкажемо, чи
-                доступне підключення саме за вашою адресою. Нижче зібрали карту
-                покриття та список будинків, які вже в роботі.
-              </p>
-            </div>
-
-            <div>
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {coverageStats.map((item) => (
-                  <div
-                    key={item.label}
-                    className="border-border/25 bg-secondary/25 rounded-3xl border px-4 py-3"
-                  >
-                    <p className="text-text text-lg font-medium">
-                      {item.value}
-                    </p>
-                    <p className="text-text-muted mt-1 text-sm leading-5">
-                      {item.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#support"
-                  className="bg-text text-background hover:bg-highlight inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition"
+          <div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {coverageStats.map((item) => (
+                <div
+                  key={item.label}
+                  className="border-border/25 bg-secondary/25 rounded-3xl border px-4 py-3"
                 >
-                  Перевірити свою адресу
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
+                  <p className="text-text text-lg font-medium">{item.value}</p>
+                  <p className="text-text-muted mt-1 text-sm leading-5">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+      </div>
 
-        <div
-          className="border-border mt-6 rounded-4xl border p-5"
-          style={{
-            backgroundImage: "var(--gradient)",
-            boxShadow: "var(--shadow)",
-          }}
-        >
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
-                Зона покриття
-              </p>
-              <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
-                Перевірте, чи є ваш будинок у зоні підключення
-              </h2>
-              <p className="text-text-muted mt-4 text-base leading-7">
-                Натисніть на мітку на мапі або виберіть вулицю у списку
-                праворуч, щоб побачити конкретні будинки, які вже підключаємо в
-                Голосіївському районі.
-              </p>
+      <div className="border-border rounded-4xl border p-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
+              Зона покриття
+            </p>
+            <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
+              Перевірте, чи є ваш будинок у зоні підключення
+            </h2>
+            <p className="text-text-muted mt-4 text-base leading-7">
+              Натисніть на мітку на мапі або виберіть вулицю у списку праворуч,
+              щоб побачити конкретні будинки, які вже підключаємо в
+              Голосіївському районі.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-[1.3fr_0.7fr]">
+          <div className="space-y-4">
+            <div className="border-border bg-background relative isolate z-0 overflow-hidden rounded-[1.75rem] border">
+              <div
+                ref={mapElementRef}
+                className={MAP_CONTAINER_CLASSNAME}
+                aria-label="Карта покриття 4Seasons у Голосіївському районі Києва"
+              />
+
+              {mapStatus !== "ready" ? (
+                <div className="bg-background/92 absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center backdrop-blur-sm">
+                  <div className="border-border/50 bg-secondary/50 text-text-muted flex h-12 w-12 items-center justify-center rounded-2xl border">
+                    <MapPinned className="h-6 w-6" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-text text-lg font-medium">
+                      {mapStatus === "loading"
+                        ? "Завантажуємо карту покриття"
+                        : "Не вдалося завантажити карту"}
+                    </p>
+                    <p className="text-text-muted text-sm leading-6">
+                      {mapStatus === "loading"
+                        ? "Мітки з адресами вже підготовлені і з'являться за мить."
+                        : "Список будинків праворуч доступний, навіть якщо карта тимчасово не відкрилася."}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-[1.3fr_0.7fr]">
-            <div className="space-y-4">
-              <div className="border-border bg-background relative z-0 isolate overflow-hidden rounded-[1.75rem] border">
-                <div
-                  ref={mapElementRef}
-                  className={MAP_CONTAINER_CLASSNAME}
-                  aria-label="Карта покриття 4Seasons у Голосіївському районі Києва"
-                />
+          <div className="grid gap-3 sm:grid-cols-2 lg:max-h-130 lg:grid-cols-1 lg:overflow-y-auto lg:pr-1">
+            {coverageStreets.map((street, index) => {
+              const isActive = street.id === activeStreetId;
 
-                {mapStatus !== "ready" ? (
-                  <div className="bg-background/92 absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center backdrop-blur-sm">
-                    <div className="border-border/50 bg-secondary/50 text-text-muted flex h-12 w-12 items-center justify-center rounded-2xl border">
-                      <MapPinned className="h-6 w-6" />
+              return (
+                <button
+                  key={street.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => setActiveStreetId(street.id)}
+                  className={`rounded-3xl border p-4 text-left transition ${
+                    isActive
+                      ? "border-highlight/70 bg-background"
+                      : "border-border bg-secondary/25 hover:bg-secondary/40"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-text text-base font-medium">
+                        {street.title}
+                      </h3>
+                      {street.mapAlias ? (
+                        <p className="text-text-muted mt-1 text-xs leading-5">
+                          На мапі може бути як {street.mapAlias}
+                        </p>
+                      ) : null}
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-text text-lg font-medium">
-                        {mapStatus === "loading"
-                          ? "Завантажуємо карту покриття"
-                          : "Не вдалося завантажити карту"}
-                      </p>
-                      <p className="text-text-muted text-sm leading-6">
-                        {mapStatus === "loading"
-                          ? "Мітки з адресами вже підготовлені і з'являться за мить."
-                          : "Список будинків праворуч доступний, навіть якщо карта тимчасово не відкрилася."}
-                      </p>
+
+                    <div className="border-border/50 bg-background text-text flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border text-sm font-medium">
+                      {index + 1}
                     </div>
                   </div>
-                ) : null}
-              </div>
-            </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 lg:max-h-130 lg:grid-cols-1 lg:overflow-y-auto lg:pr-1">
-              {coverageStreets.map((street, index) => {
-                const isActive = street.id === activeStreetId;
-
-                return (
-                  <button
-                    key={street.id}
-                    type="button"
-                    aria-pressed={isActive}
-                    onClick={() => setActiveStreetId(street.id)}
-                    className={`rounded-3xl border p-4 text-left transition ${
-                      isActive
-                        ? "border-highlight/70 bg-background"
-                        : "border-border bg-secondary/25 hover:bg-secondary/40"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-text text-base font-medium">
-                          {street.title}
-                        </h3>
-                        {street.mapAlias ? (
-                          <p className="text-text-muted mt-1 text-xs leading-5">
-                            На мапі може бути як {street.mapAlias}
-                          </p>
-                        ) : null}
-                      </div>
-
-                      <div className="border-border/50 bg-background text-text flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border text-sm font-medium">
-                        {index + 1}
-                      </div>
-                    </div>
-
-                    <p className="text-text-muted mt-3 text-sm leading-6">
-                      {street.houses.join(", ")}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
+                  <p className="text-text-muted mt-3 text-sm leading-6">
+                    {street.houses.join(", ")}
+                  </p>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
