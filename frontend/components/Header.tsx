@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Mail, Menu, Moon, Phone, Sun, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  ArrowRight,
+  Mail,
+  Menu,
+  Moon,
+  Phone,
+  Sun,
+  UserRound,
+  X,
+} from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const navItems = [
   { href: "#network", label: "Мережа" },
@@ -54,6 +63,9 @@ export default function Header() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLightTheme, setIsLightTheme] = useState(getInitialIsLightTheme);
+  const [hasScrolled, setHasScrolled] = useState(() =>
+    typeof window === "undefined" ? false : window.scrollY > 8,
+  );
   const [activeHash, setActiveHash] = useState(() =>
     typeof window === "undefined" ? "" : window.location.hash,
   );
@@ -99,6 +111,19 @@ export default function Header() {
     setActiveHash(typeof window === "undefined" ? "" : window.location.hash);
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 8);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isMobileMenuOpen) {
@@ -173,18 +198,24 @@ export default function Header() {
   const mobileTabIndex = isMobileMenuOpen ? 0 : -1;
 
   return (
-    <header className="border-border bg-foreground sticky top-0 z-50 border-b backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 -mb-16 transition-colors duration-300 ${
+        hasScrolled || isMobileMenuOpen ? "bg-foreground" : "bg-transparent"
+      }`}
+    >
       <div className="relative px-5 py-3 md:px-10">
         <div className="grid grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
-          <Link
-            to="/"
+          <a
+            href="/"
             className="flex items-center gap-3 lg:justify-self-start"
             onClick={() => closeMobileMenu()}
           >
-            <div>
-              <p className="text-text text-xl font-semibold">4Seasons</p>
-            </div>
-          </Link>
+            <img
+              src={isLightTheme ? "/logo-light.svg" : "/logo.svg"}
+              alt="4Seasons"
+              className="h-7 w-auto md:h-8"
+            />
+          </a>
 
           <nav className="hidden items-center justify-center gap-8 lg:flex lg:justify-self-center">
             {navItems.map((item) => (
@@ -198,7 +229,7 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center justify-self-end gap-3">
+          <div className="flex items-center gap-3 justify-self-end">
             <button
               type="button"
               role="switch"
@@ -223,26 +254,24 @@ export default function Header() {
               </span>
               <span
                 aria-hidden="true"
-                className={`border-border bg-secondary absolute top-0.75 left-1.5 h-8 w-8 rounded-full border shadow-sm transition-transform duration-300 ${
-                  isLightTheme ? "translate-x-[0.5px]" : "translate-x-[33.5px]"
+                className={`border-border bg-secondary absolute top-1.25 left-[8.25px] h-7 w-7 rounded-full border shadow-sm transition-transform duration-300 ${
+                  isLightTheme ? "translate-x-0" : "translate-x-[32.75px]"
                 }`}
               />
             </button>
-
-            <div className="hidden items-center gap-3 lg:flex">
-              <a
-                href="#coverage"
-                className="bg-foreground text-text border-border/50 hover:bg-secondary inline-flex items-center gap-2 rounded-full border px-4 py-2 font-semibold transition-all duration-200"
-              >
-                Перевірити адресу
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-
+            <a
+              type="button"
+              className="border-border bg-secondary/75 hover:text-text text-text-muted hover:bg-secondary hidden cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-medium backdrop-blur-lg transition-colors duration-200 lg:inline-flex"
+              aria-label="Особистий кабінет"
+              href="https://my.4seasons.net.ua/"
+            >
+              <UserRound className="h-4 w-4" />
+              Особистий кабінет
+            </a>
             <button
               ref={triggerRef}
               type="button"
-              className="border-border bg-foreground text-text hover:bg-secondary relative inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 lg:hidden"
+              className="border-border/50 bg-foreground text-text hover:bg-secondary relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors duration-200 lg:hidden"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu-panel"
               aria-haspopup="dialog"
@@ -267,7 +296,7 @@ export default function Header() {
           aria-modal="true"
           aria-labelledby="mobile-menu-title"
           aria-hidden={!isMobileMenuOpen}
-          className={`border-border bg-foreground absolute inset-x-0 top-full z-60 mx-5 mt-px rounded-b-[1.75rem] border-x border-b p-5 shadow-[0_24px_64px_oklch(0%_0_0/0.3)] transition-all duration-200 lg:hidden ${
+          className={`border-border/25 bg-foreground absolute inset-x-0 top-full z-60 mx-5 mt-px rounded-b-[1.75rem] border-x border-b p-5 shadow-[0_24px_64px_oklch(0%_0_0/0.3)] transition-all duration-200 lg:hidden ${
             isMobileMenuOpen
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-2 opacity-0"
@@ -302,13 +331,14 @@ export default function Header() {
           </nav>
 
           <a
-            href="#coverage"
+            type="button"
             tabIndex={mobileTabIndex}
-            className="bg-text text-background hover:bg-highlight mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 font-semibold transition-colors duration-200"
+            className="border-border bg-secondary/75 hover:text-text text-text-muted hover:bg-secondary mt-5 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-3 text-base font-medium backdrop-blur-lg transition-colors duration-200"
             onClick={() => closeMobileMenu()}
+            href="https://my.4seasons.net.ua/"
           >
-            Перевірити адресу
-            <ArrowRight className="h-4 w-4" />
+            <UserRound className="h-5 w-5" />
+            Особистий кабінет
           </a>
 
           <div className="border-border/60 mt-5 grid grid-cols-1 gap-2 border-t pt-5 sm:grid-cols-2">

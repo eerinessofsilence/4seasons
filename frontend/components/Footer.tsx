@@ -1,42 +1,31 @@
 import { Clock3, Mail, MapPin, Phone } from "lucide-react";
 
-const footerGroups = [
-  {
-    title: "Розділи",
-    links: [
-      { href: "#network", label: "Мережа" },
-      { href: "#plans", label: "Тарифи" },
-      { href: "#coverage", label: "Покриття" },
-      { href: "#faq", label: "FAQ" },
-    ],
-  },
-  {
-    title: "Клієнтам",
-    links: [
-      { href: "#coverage", label: "Як підключитися" },
-      { href: "#faq", label: "Питання та відповіді" },
-      { href: "#support", label: "Консультація" },
-    ],
-  },
-];
-
 export default function Footer() {
   return (
-    <footer className="border-border bg-background border-t">
-      <div className="px-5 py-8 md:px-10">
-        <div
-          className="border-border grid grid-cols-1 gap-6 rounded-3xl border p-8 md:grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr]"
-          style={{
-            backgroundImage: "var(--gradient)",
-            boxShadow: "var(--shadow)",
-          }}
-        >
+    <footer className="bg-foreground relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-12"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, var(--bg-dark) 0%, oklch(0% 0 0 / 0) 100%)",
+        }}
+      />
+
+      <div className="relative z-10 space-y-16 px-5 py-16 pt-24 md:px-10">
+        <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div>
-                <p className="text-text font-medium">4Seasons</p>
-                <p className="text-text/80">
-                  Домашній інтернет у Голосіївському районі Києва
+              <div className="space-y-2">
+                <a href="/" className="flex items-center opacity-50">
+                  <img
+                    src="/logo-footer.svg"
+                    alt="4Seasons"
+                    className="h-7 w-auto"
+                  />
+                </a>
+                <p className="text-text/75 font-medium lg:text-lg">
+                  Домашній інтернет у Києвi
                 </p>
               </div>
             </div>
@@ -45,25 +34,6 @@ export default function Footer() {
               зв&apos;язку після монтажу.
             </p>
           </div>
-
-          {footerGroups.map((group) => (
-            <div key={group.title} className="space-y-4">
-              <h2 className="text-text text-sm font-semibold tracking-[0.2em] uppercase">
-                {group.title}
-              </h2>
-              <div className="space-y-3">
-                {group.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="text-text-muted hover:text-text block text-sm transition"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
 
           <div className="space-y-4">
             <h2 className="text-text text-sm font-semibold tracking-[0.2em] uppercase">
@@ -96,10 +66,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-border text-text-muted mt-6 flex flex-col gap-3 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © 2026 4Seasons. Домашній інтернет для спокійного щоденного ритму.
-          </p>
+        <div className="text-text-muted/50 flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 4Seasons. All Rights Reserved.</p>
           <div className="flex gap-4">
             <a href="#hero" className="hover:text-text transition">
               Політика конфіденційності
