@@ -203,7 +203,7 @@ export default function Header() {
         hasScrolled || isMobileMenuOpen ? "bg-foreground" : "bg-transparent"
       }`}
     >
-      <div className="relative px-5 py-3 md:px-10">
+      <div className="relative px-8 py-3 md:px-16 lg:px-24">
         <div className="grid grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
           <a
             href="/"

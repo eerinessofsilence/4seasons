@@ -506,7 +506,7 @@ export default function CoverageSection() {
   }, [activeStreetId, mapStatus]);
 
   return (
-    <section id="coverage" className="space-y-12 px-5 py-12 md:px-10 md:py-24">
+    <section id="coverage" className="space-y-12 p-8 md:p-16 lg:p-24">
       <div className="flex max-w-4xl flex-col gap-3">
         <div className="text-pretty">
           <p className="text-text-muted text-sm font-medium tracking-widest uppercase">

@@ -20,7 +20,7 @@ const servicePillars = [
 
 export default function Network() {
   return (
-    <section id="network" className="px-5 py-12 md:px-10 md:py-24">
+    <section id="network" className="p-8 md:p-16 lg:p-24">
       <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div className="space-y-8 lg:sticky lg:top-20">
           <div className="flex flex-col space-y-5">

@@ -24,7 +24,7 @@ export default function SupportSection() {
 
   return (
     <section id="faq">
-      <div className="px-5 py-12 md:px-10 md:py-24">
+      <div className="p-8 md:p-16 lg:p-24">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
@@ -110,7 +110,7 @@ export default function SupportSection() {
               <div className="space-y-4">
                 <a
                   href="tel:+380000000000"
-                  className="border-border bg-secondary/25 hover:bg-secondary/50 text-text hover:text-highlight/90 flex items-center justify-between rounded-3xl border px-5 py-4 text-sm font-medium transition"
+                  className="border-highlight/50 bg-secondary/25 hover:bg-secondary/50 text-highlight hover:text-highlight/90 flex items-center justify-between rounded-3xl border px-5 py-4 text-sm font-medium transition"
                 >
                   <span className="flex items-center gap-3">
                     <PhoneCall className="h-4 w-4" />

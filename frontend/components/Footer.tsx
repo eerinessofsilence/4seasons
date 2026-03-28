@@ -12,7 +12,7 @@ export default function Footer() {
         }}
       />
 
-      <div className="relative z-10 space-y-16 px-5 py-16 pt-24 md:px-10">
+      <div className="relative z-10 space-y-16 p-8 pt-16 md:p-16 lg:p-24">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
