@@ -32,6 +32,7 @@ const contactItems = [
 ];
 
 const THEME_STORAGE_KEY = "4seasons-theme";
+const HEADER_IDLE_DELAY = 1600;
 
 function getInitialIsLightTheme() {
   if (typeof window === "undefined") {
@@ -69,9 +70,11 @@ export default function Header() {
   const [activeHash, setActiveHash] = useState(() =>
     typeof window === "undefined" ? "" : window.location.hash,
   );
+  const [isHeaderActive, setIsHeaderActive] = useState(true);
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const idleTimeoutRef = useRef<number | null>(null);
 
   const openMobileMenu = () => setIsMobileMenuOpen(true);
   const toggleTheme = () => setIsLightTheme((currentValue) => !currentValue);
@@ -113,17 +116,48 @@ export default function Header() {
   }, [location.pathname]);
 
   useEffect(() => {
+    const clearIdleTimeout = () => {
+      if (idleTimeoutRef.current !== null) {
+        window.clearTimeout(idleTimeoutRef.current);
+        idleTimeoutRef.current = null;
+      }
+    };
+
+    const scheduleHeaderFade = () => {
+      clearIdleTimeout();
+      setIsHeaderActive(true);
+
+      if (window.scrollY <= 8 || isMobileMenuOpen) {
+        return;
+      }
+
+      idleTimeoutRef.current = window.setTimeout(() => {
+        setIsHeaderActive(false);
+      }, HEADER_IDLE_DELAY);
+    };
+
     const handleScroll = () => {
-      setHasScrolled(window.scrollY > 8);
+      const isAtTop = window.scrollY <= 8;
+
+      setHasScrolled(!isAtTop);
+
+      if (isAtTop) {
+        clearIdleTimeout();
+        setIsHeaderActive(true);
+        return;
+      }
+
+      scheduleHeaderFade();
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
+      clearIdleTimeout();
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     if (!isMobileMenuOpen) {
@@ -199,9 +233,14 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 -mb-16 transition-colors duration-300 ${
+      className={`sticky top-0 z-50 -mb-16 transition-[opacity,background-color] duration-500 ${
         hasScrolled || isMobileMenuOpen ? "bg-foreground" : "bg-transparent"
+      } ${
+        !hasScrolled || isMobileMenuOpen || isHeaderActive
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none opacity-0"
       }`}
+      onFocusCapture={() => setIsHeaderActive(true)}
     >
       <div className="relative px-8 py-3 md:px-16 lg:px-24">
         <div className="grid grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
