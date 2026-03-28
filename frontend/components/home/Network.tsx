@@ -36,20 +36,14 @@ export default function Network() {
 
           <a
             href="#coverage"
-            className="border-border bg-secondary/75 hover:text-text text-text-muted hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-lg font-medium backdrop-blur-lg transition-colors duration-200"
+            className="border-border bg-secondary/75 hover:text-text-muted text-text hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-lg font-medium backdrop-blur-lg transition-colors duration-200"
           >
             <MapIcon className="h-5 w-5" />
             Перевірити адресу
           </a>
         </div>
 
-        <div
-          className="border-border rounded-4xl border p-6 sm:p-8"
-          style={{
-            backgroundImage: "var(--gradient)",
-            boxShadow: "var(--shadow)",
-          }}
-        >
+        <div className="border-border rounded-4xl border p-5">
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
@@ -67,9 +61,11 @@ export default function Network() {
                 return (
                   <div
                     key={pillar.title}
-                    className="border-border bg-background rounded-3xl border p-5"
+                    className="border-border/50 bg-foreground relative overflow-hidden rounded-3xl border p-5"
                   >
-                    <div className="flex items-start gap-4">
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.075),transparent_50%),linear-gradient(120deg,rgba(255,255,255,0.05),transparent_50%)]" />
+
+                    <div className="relative z-10 flex items-start gap-4">
                       <div className="border-border/50 bg-secondary/50 text-highlight/75 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
                         <Icon className="h-5 w-5" />
                       </div>

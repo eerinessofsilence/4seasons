@@ -508,7 +508,7 @@ export default function CoverageSection() {
   return (
     <section id="coverage" className="space-y-12 px-5 py-12 md:px-10 md:py-24">
       <div className="flex flex-col gap-3">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl text-pretty">
           <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
             Покриття і підключення
           </p>
@@ -516,7 +516,7 @@ export default function CoverageSection() {
             Спочатку перевіряємо адресу, потім підключаємо без зайвих кроків.
           </h2>
         </div>
-        <p className="text-text-muted max-w-xl leading-7">
+        <p className="text-text-muted max-w-3xl leading-7">
           Зібрали карту покриття, показали будинки, які вже в роботі, і коротко
           пояснили, як проходить підключення від перевірки адреси до монтажу.
         </p>
@@ -530,9 +530,11 @@ export default function CoverageSection() {
             return (
               <article
                 key={step.title}
-                className="border-border bg-foreground rounded-[1.75rem] border p-5"
+                className="border-border/50 bg-foreground relative overflow-hidden rounded-[1.75rem] border p-5"
               >
-                <div className="flex items-start gap-4">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.075),transparent_50%),linear-gradient(120deg,rgba(255,255,255,0.05),transparent_50%)]" />
+
+                <div className="relative z-10 flex items-start gap-4">
                   <div className="border-border/50 bg-secondary/50 text-highlight/75 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
                     <Icon className="h-5 w-5" />
                   </div>
@@ -641,8 +643,8 @@ export default function CoverageSection() {
                   onClick={() => setActiveStreetId(street.id)}
                   className={`rounded-3xl border p-4 text-left transition ${
                     isActive
-                      ? "border-highlight/70 bg-background"
-                      : "border-border bg-secondary/25 hover:bg-secondary/40"
+                      ? "border-highlight/90 bg-foreground"
+                      : "border-border/50 hover:border-border/50 bg-foreground hover:bg-secondary/50"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -657,7 +659,7 @@ export default function CoverageSection() {
                       ) : null}
                     </div>
 
-                    <div className="border-border/50 bg-background text-text flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border text-sm font-medium">
+                    <div className="border-border/25 bg-secondary/50 text-text-muted flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border text-sm font-medium">
                       {index + 1}
                     </div>
                   </div>

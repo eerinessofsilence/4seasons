@@ -9,18 +9,18 @@ export default function Hero() {
     >
       <div className="absolute inset-0 opacity-50">
         <SoftAurora
-          speed={0.2}
+          speed={0.3}
           scale={1.5}
-          brightness={0.5}
+          brightness={0.6}
           color1="#E69A00"
           color2="#CC8800"
           noiseFrequency={1}
           noiseAmplitude={2}
           bandHeight={0.5}
-          bandSpread={1}
-          octaveDecay={0.1}
+          bandSpread={1.25}
+          octaveDecay={0.25}
           layerOffset={0}
-          colorSpeed={0.5}
+          colorSpeed={0.6}
           enableMouseInteraction={false}
         />
       </div>
@@ -32,7 +32,7 @@ export default function Hero() {
             <span className="text-highlight block">без просідань</span>
           </h1>
 
-          <p className="text-text-muted mt-5 max-w-2xl text-lg md:leading-8 lg:text-xl">
+          <p className="text-text-muted mt-5 max-w-3xl text-lg md:leading-8 lg:text-xl">
             Для роботи, навчання, 4K і ігор одночасно. Підключаємо за 1-2 дні,
             допомагаємо з роутером і залишаємося на зв&apos;язку після монтажу
           </p>
@@ -40,15 +40,15 @@ export default function Hero() {
         <div className="flex flex-row justify-center">
           <a
             href="#plans"
-            className="hero-cta inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xl font-medium"
+            className="text-foreground bg-highlight hover:text-background inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xl font-medium shadow-[inset_0_1px_0_oklch(100%_0_0/0.5)] transition-all duration-400 hover:bg-[oklch(80%_0.2_65)] hover:shadow-[inset_0_1px_0_oklch(100%_0_0/0.75)]"
           >
             Підібрати тариф за хвилину
             <ArrowRight className="h-5 w-5 stroke-[2.5px]" />
           </a>
         </div>
         <div className="flex justify-center">
-          <div className="border-border/50 bg-foreground text-text-muted inline-flex items-center gap-3 rounded-full border px-3 py-1 text-sm backdrop-blur-sm">
-            <Wifi className="h-5 w-5" />
+          <div className="border-border/25 bg-secondary/25 text-text-muted/75 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm backdrop-blur-sm">
+            <Wifi className="text-text-muted/50 h-5 w-5" />
             Від 299 грн на місяць / до 1 Гбіт/с
           </div>
         </div>

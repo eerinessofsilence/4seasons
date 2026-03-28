@@ -63,9 +63,9 @@ export default function BenefitsSection() {
           return (
             <article
               key={item.title}
-              className="border-border bg-foreground relative overflow-hidden rounded-3xl border p-5"
+              className="border-border/50 bg-foreground relative overflow-hidden rounded-3xl border p-5"
             >
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_50%,rgba(255,255,255,0.025),transparent_40%),linear-gradient(170deg,rgba(255,255,255,0.025),transparent_34%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.075),transparent_50%),linear-gradient(120deg,rgba(255,255,255,0.05),transparent_50%)]" />
 
               <div className="relative z-10">
                 <div className="flex items-center gap-2">

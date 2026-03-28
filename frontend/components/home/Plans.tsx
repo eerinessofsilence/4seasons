@@ -182,7 +182,7 @@ export default function PlansSection() {
             <div className="flex justify-center">
               <a
                 href="#coverage"
-                className={`plans-cta mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-right font-medium ${
+                className={`plans-cta mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-right font-medium transition-all duration-400 ${
                   plan.featured ? "plans-cta-featured" : "plans-cta-subtle"
                 }`}
               >
@@ -245,10 +245,12 @@ export default function PlansSection() {
           return (
             <div
               key={extra.title}
-              className="border-border bg-foreground rounded-[1.75rem] border p-6"
+              className="border-border/50 bg-foreground relative overflow-hidden rounded-[1.75rem] border p-6"
             >
-              <div className="flex items-start gap-4">
-                <div className="border-border/50 bg-secondary/50 text-highlight/75 flex h-10 w-10 items-center justify-center rounded-xl border">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.075),transparent_50%),linear-gradient(120deg,rgba(255,255,255,0.05),transparent_50%)]" />
+
+              <div className="relative z-10 flex items-start gap-4">
+                <div className="border-border/50 bg-secondary/50 text-highlight/75 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
