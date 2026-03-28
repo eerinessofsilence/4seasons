@@ -43,7 +43,9 @@ export default function Network() {
           </a>
         </div>
 
-        <div className="border-border rounded-4xl border p-5">
+        <div className="border-border relative rounded-4xl border p-5">
+          <div className="pointer-events-none absolute inset-0 rounded-4xl bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_75%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.05),transparent_75%)]" />
+
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-text-muted text-sm font-medium tracking-widest uppercase">

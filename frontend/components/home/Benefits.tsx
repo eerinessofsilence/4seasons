@@ -41,8 +41,8 @@ const benefits: BenefitItem[] = [
 
 export default function BenefitsSection() {
   return (
-    <section className="space-y-12 px-5 py-12 md:px-10 md:py-24">
-      <div className="max-w-3xl">
+    <section className="relative space-y-12 px-5 py-12 md:px-10 md:py-24">
+      <div className="max-w-4xl">
         <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
           Чому нас обирають
         </p>

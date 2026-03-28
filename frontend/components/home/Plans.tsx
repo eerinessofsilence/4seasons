@@ -126,20 +126,18 @@ export default function PlansSection() {
         {plans.map((plan) => (
           <article
             key={plan.name}
-            className={`space-y-4 rounded-4xl border p-6 ${
+            className={`relative space-y-4 overflow-hidden rounded-4xl border p-6 ${
               plan.featured
                 ? "bg-secondary/50 border-border"
-                : "bg-foreground border-border/50"
+                : "bg-secondary/25 border-border/50"
             }`}
-            style={
-              plan.featured
-                ? {
-                    backgroundImage:
-                      "radial-gradient(circle at 50% 0%, oklch(100% 0 0 / 0.03), transparent 46%), linear-gradient(180deg, oklch(100% 0 0 / 0.012), transparent 38%)",
-                  }
-                : undefined
-            }
           >
+            {plan.featured ? (
+              <div className="pointer-events-none absolute -inset-4 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_50%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.1),transparent_50%)]" />
+            ) : (
+              <div className="pointer-events-none absolute -inset-4 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.025),transparent_25%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.05),transparent_25%)]" />
+            )}
+
             <div className="flex flex-col items-start justify-between gap-4">
               <div className="flex w-full items-center justify-between gap-3">
                 <h3 className="text-text text-2xl">{plan.name}</h3>

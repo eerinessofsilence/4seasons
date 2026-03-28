@@ -507,8 +507,8 @@ export default function CoverageSection() {
 
   return (
     <section id="coverage" className="space-y-12 px-5 py-12 md:px-10 md:py-24">
-      <div className="flex flex-col gap-3">
-        <div className="max-w-3xl text-pretty">
+      <div className="flex max-w-4xl flex-col gap-3">
+        <div className="text-pretty">
           <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
             Покриття і підключення
           </p>
@@ -550,40 +550,42 @@ export default function CoverageSection() {
           })}
         </div>
 
-        <div className="border-border bg-foreground h-full rounded-3xl border p-5">
-          <div>
+        <div className="border-border bg-foreground relative flex h-full flex-col justify-between rounded-3xl border p-5">
+          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_75%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.05),transparent_75%)]" />
+
+          <div className="space-y-4">
             <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
               Покриття
             </p>
-            <h2 className="text-text mt-4 text-3xl font-medium sm:text-4xl">
+            <h2 className="text-text max-w-lg text-3xl font-medium sm:text-4xl">
               Працюємо в Голосіївському районі Києва
             </h2>
-            <p className="text-text-muted mt-4 max-w-3xl text-base leading-7">
+            <p className="text-text-muted max-w-3xl text-base leading-7">
               Підключаємо будинки на вказаних вулицях і швидко підкажемо, чи
               доступне підключення саме за вашою адресою. Нижче зібрали карту
               покриття та список будинків, які вже в роботі.
             </p>
           </div>
 
-          <div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              {coverageStats.map((item) => (
-                <div
-                  key={item.label}
-                  className="border-border/25 bg-secondary/25 rounded-3xl border px-4 py-3"
-                >
-                  <p className="text-text text-lg font-medium">{item.value}</p>
-                  <p className="text-text-muted mt-1 text-sm leading-5">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {coverageStats.map((item) => (
+              <div
+                key={item.label}
+                className="border-border/25 bg-secondary/25 space-y-2 rounded-3xl border p-5"
+              >
+                <p className="text-text text-3xl font-semibold tracking-wide">
+                  {item.value}
+                </p>
+                <p className="text-text-muted leading-5">{item.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="border-border rounded-4xl border p-5">
+      <div className="border-border relative rounded-4xl border p-5">
+        <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_75%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.05),transparent_75%)]" />
+
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
             <p className="text-text-muted text-sm font-medium tracking-widest uppercase">

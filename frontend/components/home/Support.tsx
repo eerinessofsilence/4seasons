@@ -34,7 +34,9 @@ export default function SupportSection() {
               Відповідаємо до підключення і не зникаємо після нього.
             </h2>
 
-            <div className="border-border bg-foreground mt-8 h-fit overflow-hidden rounded-4xl border">
+            <div className="border-border bg-foreground relative mt-8 h-fit overflow-hidden rounded-4xl border">
+              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_75%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.05),transparent_75%)]" />
+
               {faqs.map((item, index) => {
                 const isOpen = openIndex === index;
 
@@ -91,9 +93,11 @@ export default function SupportSection() {
 
           <aside
             id="support"
-            className="border-border flex flex-col justify-between gap-8 rounded-4xl border p-5"
+            className="border-border bg-foreground relative isolate flex flex-col justify-between gap-8 overflow-hidden rounded-4xl border p-5"
           >
-            <div>
+            <div className="pointer-events-none absolute inset-0 rounded-4xl bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_68%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.08),transparent_70%)]" />
+
+            <div className="relative z-10">
               <h3 className="text-text text-2xl font-semibold">
                 Потрібна консультація?
               </h3>
@@ -102,7 +106,7 @@ export default function SupportSection() {
                 довгого очікування і без переадресацій між відділами.
               </p>
             </div>
-            <div className="space-y-6">
+            <div className="relative z-10 space-y-6">
               <div className="space-y-4">
                 <a
                   href="tel:+380000000000"
