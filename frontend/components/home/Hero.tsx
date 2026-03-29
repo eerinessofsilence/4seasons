@@ -29,8 +29,8 @@ export default function Hero() {
         <div className="flex flex-col gap-12 lg:gap-16">
           <div className="flex flex-col items-center text-center">
             <h1 className="text-text max-w-3xl text-5xl font-semibold tracking-tight md:text-6xl lg:text-7xl">
-              Домашній інтернет
-              <span className="text-highlight block">без просідань</span>
+              Інтернет для дому
+              <span className="text-highlight block">який не підводить</span>
             </h1>
 
             <p className="text-text-muted mt-5 max-w-3xl text-lg md:leading-8 lg:text-xl">
@@ -52,7 +52,7 @@ export default function Hero() {
         <div className="flex justify-center">
           <div className="border-border/25 bg-secondary/25 text-text-muted/75 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm backdrop-blur-sm">
             <Wifi className="text-text-muted/50 h-5 w-5" />
-            Від 299 грн на місяць / до 1 Гбіт/с
+            Від 250 грн на місяць / до 1 Гбіт/с
           </div>
         </div>
       </div>
