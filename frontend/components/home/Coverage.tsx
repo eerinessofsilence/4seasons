@@ -16,6 +16,10 @@ interface LeafletPopupOptions {
   maxWidth?: number;
 }
 
+interface LeafletLayer {
+  addTo(map: LeafletMap): void;
+}
+
 interface LeafletTileLayer {
   addTo(map: LeafletMap): void;
 }
@@ -32,7 +36,12 @@ interface LeafletMarker {
 
 interface LeafletBounds {}
 
+interface LeafletAttributionControl {
+  setPrefix(prefix: string | false): void;
+}
+
 interface LeafletMap {
+  attributionControl?: LeafletAttributionControl;
   fitBounds(bounds: LeafletBounds, options?: { padding?: LeafletLatLng }): void;
   remove(): void;
   setView(
@@ -71,17 +80,22 @@ interface LeafletGlobal {
       maxZoom?: number;
     },
   ): LeafletTileLayer;
+  maplibreGL?(options: { style: string }): LeafletLayer;
 }
 
 declare global {
   interface Window {
     L?: LeafletGlobal;
-    __leafletPromise?: Promise<LeafletGlobal>;
+    __coverageMapPromise?: Promise<LeafletGlobal>;
   }
 }
 
 const LEAFLET_CSS_ID = "coverage-leaflet-styles";
 const LEAFLET_SCRIPT_ID = "coverage-leaflet-script";
+const MAPLIBRE_CSS_ID = "coverage-maplibre-styles";
+const MAPLIBRE_SCRIPT_ID = "coverage-maplibre-script";
+const MAPLIBRE_LEAFLET_SCRIPT_ID = "coverage-maplibre-leaflet-script";
+const OPEN_FREEMAP_STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 const MAP_MARKER_CLASSNAME = "!border-0 !bg-transparent";
 const MAP_MARKER_PIN_CLASSNAME =
   "relative inline-flex h-[34px] w-[34px] items-center justify-center rounded-full border border-secondary bg-[radial-gradient(circle_at_30%_30%,oklch(100%_0_0_/_0.08),transparent_40%),linear-gradient(180deg,var(--bg-light),var(--bg))] text-text text-[0.8125rem] font-bold shadow-[0_14px_28px_oklch(0%_0_0_/_0.28),inset_0_1px_0_oklch(100%_0_0_/_0.06)] before:absolute before:inset-[7px] before:rounded-full before:bg-secondary/25 before:content-['']";
@@ -316,53 +330,95 @@ function ensureLeafletStylesheet() {
   document.head.append(stylesheet);
 }
 
-function loadLeaflet(): Promise<LeafletGlobal> {
-  ensureLeafletStylesheet();
-
-  if (window.L) {
-    return Promise.resolve(window.L);
+function ensureMapLibreStylesheet() {
+  if (document.getElementById(MAPLIBRE_CSS_ID)) {
+    return;
   }
 
-  if (window.__leafletPromise) {
-    return window.__leafletPromise;
-  }
+  const stylesheet = document.createElement("link");
+  stylesheet.id = MAPLIBRE_CSS_ID;
+  stylesheet.rel = "stylesheet";
+  stylesheet.href = "https://unpkg.com/maplibre-gl@2.2.1/dist/maplibre-gl.css";
+  document.head.append(stylesheet);
+}
 
-  window.__leafletPromise = new Promise<LeafletGlobal>((resolve, reject) => {
-    const handleLoad = () => {
-      if (window.L) {
-        resolve(window.L);
-        return;
-      }
-
-      window.__leafletPromise = undefined;
-      reject(new Error("Leaflet did not initialize correctly."));
-    };
-
-    const handleError = () => {
-      window.__leafletPromise = undefined;
-      reject(new Error("Leaflet assets failed to load."));
-    };
-
+function loadScript(scriptId: string, src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
     const existingScript = document.getElementById(
-      LEAFLET_SCRIPT_ID,
+      scriptId,
     ) as HTMLScriptElement | null;
+
+    const handleLoad = () => resolve();
+    const handleError = () =>
+      reject(new Error(`Failed to load script: ${src}`));
 
     if (existingScript) {
       existingScript.addEventListener("load", handleLoad, { once: true });
       existingScript.addEventListener("error", handleError, { once: true });
+
+      if (existingScript.dataset.loaded === "true") {
+        resolve();
+      }
+
       return;
     }
 
     const script = document.createElement("script");
-    script.id = LEAFLET_SCRIPT_ID;
-    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.id = scriptId;
+    script.src = src;
     script.async = true;
-    script.addEventListener("load", handleLoad, { once: true });
+    script.addEventListener(
+      "load",
+      () => {
+        script.dataset.loaded = "true";
+        resolve();
+      },
+      { once: true },
+    );
     script.addEventListener("error", handleError, { once: true });
     document.body.append(script);
   });
+}
 
-  return window.__leafletPromise;
+function loadMapLibraries(): Promise<LeafletGlobal> {
+  ensureLeafletStylesheet();
+  ensureMapLibreStylesheet();
+
+  if (window.L?.maplibreGL) {
+    return Promise.resolve(window.L);
+  }
+
+  if (window.__coverageMapPromise) {
+    return window.__coverageMapPromise;
+  }
+
+  window.__coverageMapPromise = (async () => {
+    try {
+      await loadScript(
+        LEAFLET_SCRIPT_ID,
+        "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+      );
+      await loadScript(
+        MAPLIBRE_SCRIPT_ID,
+        "https://unpkg.com/maplibre-gl@2.2.1/dist/maplibre-gl.js",
+      );
+      await loadScript(
+        MAPLIBRE_LEAFLET_SCRIPT_ID,
+        "https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js",
+      );
+
+      if (!window.L?.maplibreGL) {
+        throw new Error("MapLibre Leaflet bridge did not initialize.");
+      }
+
+      return window.L;
+    } catch (error) {
+      window.__coverageMapPromise = undefined;
+      throw error;
+    }
+  })();
+
+  return window.__coverageMapPromise;
 }
 
 function escapeHtml(value: string) {
@@ -407,7 +463,7 @@ export default function CoverageSection() {
       }
 
       try {
-        const Leaflet = await loadLeaflet();
+        const Leaflet = await loadMapLibraries();
 
         if (isCancelled || !mapElementRef.current) {
           return;
@@ -418,14 +474,11 @@ export default function CoverageSection() {
         });
 
         mapRef.current = map;
+        map.attributionControl?.setPrefix(false);
 
-        Leaflet.tileLayer(
-          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          {
-            attribution: "&copy; OpenStreetMap contributors",
-            maxZoom: 19,
-          },
-        ).addTo(map);
+        Leaflet.maplibreGL?.({
+          style: OPEN_FREEMAP_STYLE_URL,
+        }).addTo(map);
 
         const markers: Record<string, LeafletMarker> = {};
 
