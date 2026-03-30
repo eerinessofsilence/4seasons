@@ -1,28 +1,106 @@
+import { Suspense, lazy, useEffect, useState } from "react";
 import { ArrowRight, Wifi } from "lucide-react";
-import SoftAurora from "../ui/SoftAurora";
+
+const SoftAurora = lazy(() => import("../ui/SoftAurora"));
+
+function addMediaQueryListener(
+  mediaQuery: MediaQueryList,
+  handler: () => void,
+): () => void {
+  if ("addEventListener" in mediaQuery) {
+    mediaQuery.addEventListener("change", handler);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handler);
+    };
+  }
+
+  const legacyMediaQuery = mediaQuery as MediaQueryList & {
+    addListener: (listener: () => void) => void;
+    removeListener: (listener: () => void) => void;
+  };
+
+  legacyMediaQuery.addListener(handler);
+
+  return () => {
+    legacyMediaQuery.removeListener(handler);
+  };
+}
+
+function getShouldRenderAurora() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return (
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    !window.matchMedia("(max-width: 767px)").matches
+  );
+}
 
 export default function Hero() {
+  const [shouldRenderAurora, setShouldRenderAurora] = useState(
+    getShouldRenderAurora,
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const reducedMotionMedia = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const mobileMedia = window.matchMedia("(max-width: 767px)");
+
+    const syncAuroraAvailability = () => {
+      setShouldRenderAurora(
+        !reducedMotionMedia.matches && !mobileMedia.matches,
+      );
+    };
+
+    syncAuroraAvailability();
+
+    const cleanupReducedMotion = addMediaQueryListener(
+      reducedMotionMedia,
+      syncAuroraAvailability,
+    );
+    const cleanupMobile = addMediaQueryListener(
+      mobileMedia,
+      syncAuroraAvailability,
+    );
+
+    return () => {
+      cleanupReducedMotion();
+      cleanupMobile();
+    };
+  }, []);
+
   return (
     <section
       id="hero"
       className="relative min-h-screen p-8 pt-32 md:p-16 md:pt-36 lg:p-24 lg:pt-32"
     >
       <div className="absolute inset-0 opacity-50">
-        <SoftAurora
-          speed={0.3}
-          scale={1.5}
-          brightness={0.6}
-          color1="#E69A00"
-          color2="#CC8800"
-          noiseFrequency={1}
-          noiseAmplitude={2}
-          bandHeight={0.5}
-          bandSpread={1.25}
-          octaveDecay={0.25}
-          layerOffset={0}
-          colorSpeed={0.6}
-          enableMouseInteraction={false}
-        />
+        {shouldRenderAurora ? (
+          <Suspense fallback={null}>
+            <SoftAurora
+              speed={0.3}
+              scale={1.5}
+              brightness={0.6}
+              color1="#E69A00"
+              color2="#CC8800"
+              noiseFrequency={1}
+              noiseAmplitude={2}
+              bandHeight={0.5}
+              bandSpread={1.25}
+              octaveDecay={0.25}
+              layerOffset={0}
+              colorSpeed={0.6}
+              enableMouseInteraction={false}
+            />
+          </Suspense>
+        ) : null}
       </div>
 
       <div className="relative z-10 flex flex-col gap-20 lg:gap-24">

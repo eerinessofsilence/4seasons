@@ -184,7 +184,7 @@ function PlanCards({
       {plans.map((plan) => (
         <article
           key={plan.name}
-          className={`relative flex h-full flex-col overflow-hidden rounded-4xl border p-6 ${
+          className={`relative flex h-full flex-col overflow-hidden rounded-4xl border p-5 ${
             plan.featured
               ? "border-border bg-secondary/50"
               : "border-border/50 bg-secondary/25"
@@ -275,7 +275,7 @@ function ComparisonTable({
 
   return (
     <div className="border-border/50 bg-secondary/25 overflow-hidden rounded-4xl border">
-      <div className="overflow-x-auto overscroll-contain">
+      <div className="overflow-x-auto">
         <div style={{ minWidth: getComparisonMinWidth(plans.length) }}>
           <div
             style={gridStyle}
@@ -379,7 +379,7 @@ export default function PlansSection() {
       </div>
 
       <div className="grid items-start gap-4 xl:grid-cols-3">
-        <article className="border-border/50 bg-foreground relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-6">
+        <article className="border-border/50 bg-foreground relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-5">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.075),transparent_50%),linear-gradient(120deg,rgba(255,255,255,0.05),transparent_50%)]" />
 
           <div className="relative z-10 flex h-full flex-col space-y-6">
@@ -447,7 +447,7 @@ export default function PlansSection() {
           </div>
         </article>
 
-        <article className="border-border/50 bg-foreground relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-6 xl:col-span-2">
+        <article className="border-border/50 bg-foreground relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-5 xl:col-span-2">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.075),transparent_50%),linear-gradient(120deg,rgba(255,255,255,0.05),transparent_50%)]" />
 
           <div className="relative z-10 flex h-full flex-col">
@@ -544,7 +544,7 @@ export default function PlansSection() {
         </article>
       </div>
 
-      <div className="border-border/50 bg-secondary/5 relative overflow-hidden rounded-4xl border p-6 md:p-8">
+      <div className="border-border/50 bg-secondary/5 relative overflow-hidden rounded-4xl border p-5">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.07),transparent_60%),radial-gradient(circle_at_90%_100%,rgba(200,200,200,0.08),transparent_65%)]" />
 
         <div className="relative z-10 flex flex-col gap-4 md:flex-row md:items-start">

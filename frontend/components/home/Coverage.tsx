@@ -98,7 +98,7 @@ const MAPLIBRE_LEAFLET_SCRIPT_ID = "coverage-maplibre-leaflet-script";
 const OPEN_FREEMAP_STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 const MAP_MARKER_CLASSNAME = "!border-0 !bg-transparent";
 const MAP_MARKER_PIN_CLASSNAME =
-  "relative inline-flex h-[34px] w-[34px] items-center justify-center rounded-full border border-secondary bg-[radial-gradient(circle_at_30%_30%,oklch(100%_0_0_/_0.08),transparent_40%),linear-gradient(180deg,var(--bg-light),var(--bg))] text-text text-[0.8125rem] font-bold shadow-[0_14px_28px_oklch(0%_0_0_/_0.28),inset_0_1px_0_oklch(100%_0_0_/_0.06)] before:absolute before:inset-[7px] before:rounded-full before:bg-secondary/25 before:content-['']";
+  "relative inline-flex h-[26px] w-[26px] items-center justify-center rounded-full border border-secondary bg-[radial-gradient(circle_at_30%_30%,oklch(100%_0_0_/_0.08),transparent_40%),linear-gradient(180deg,var(--bg-light),var(--bg))] text-text text-[0.6875rem] font-bold shadow-[0_10px_20px_oklch(0%_0_0_/_0.24),inset_0_1px_0_oklch(100%_0_0_/_0.06)] before:absolute before:inset-[5px] before:rounded-full before:bg-secondary/25 before:content-['']";
 const MAP_POPUP_WRAPPER_CLASSNAME = "max-w-[18rem] bg-transparent px-4 py-3.5";
 const MAP_POPUP_EYEBROW_CLASSNAME =
   "m-0 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-text-muted";
@@ -446,16 +446,56 @@ function createPopupMarkup(street: CoverageStreet) {
 }
 
 export default function CoverageSection() {
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
   const [activeStreetId, setActiveStreetId] = useState<string | null>(null);
-  const [mapStatus, setMapStatus] = useState<"loading" | "ready" | "error">(
-    "loading",
-  );
+  const [mapStatus, setMapStatus] = useState<
+    "idle" | "loading" | "ready" | "error"
+  >("idle");
+  const mapViewportRef = useRef<HTMLDivElement | null>(null);
   const mapElementRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (shouldLoadMap || !mapViewportRef.current) {
+      return;
+    }
+
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      setShouldLoadMap(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) {
+          return;
+        }
+
+        setShouldLoadMap(true);
+        observer.disconnect();
+      },
+      {
+        rootMargin: "320px 0px",
+        threshold: 0.01,
+      },
+    );
+
+    observer.observe(mapViewportRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [shouldLoadMap]);
+
   const mapRef = useRef<LeafletMap | null>(null);
   const markerRefs = useRef<Record<string, LeafletMarker>>({});
 
   useEffect(() => {
+    if (!shouldLoadMap) {
+      return;
+    }
+
     let isCancelled = false;
+    setMapStatus("loading");
 
     async function initializeMap() {
       if (!mapElementRef.current) {
@@ -470,7 +510,7 @@ export default function CoverageSection() {
         }
 
         const map = Leaflet.map(mapElementRef.current, {
-          scrollWheelZoom: false,
+          scrollWheelZoom: true,
         });
 
         mapRef.current = map;
@@ -487,9 +527,9 @@ export default function CoverageSection() {
             icon: Leaflet.divIcon({
               className: MAP_MARKER_CLASSNAME,
               html: `<span class="${MAP_MARKER_PIN_CLASSNAME}">${index + 1}</span>`,
-              iconSize: [30, 30],
-              iconAnchor: [15, 30],
-              popupAnchor: [0, -24],
+              iconSize: [26, 26],
+              iconAnchor: [13, 26],
+              popupAnchor: [0, -20],
             }),
           })
             .addTo(map)
@@ -533,7 +573,7 @@ export default function CoverageSection() {
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, []);
+  }, [shouldLoadMap]);
 
   useEffect(() => {
     if (mapStatus !== "ready" || !activeStreetId || !mapRef.current) {
@@ -658,11 +698,13 @@ export default function CoverageSection() {
         <div className="mt-8 grid gap-5 lg:grid-cols-[1.3fr_0.7fr]">
           <div className="space-y-4">
             <div className="border-border bg-background relative isolate z-0 overflow-hidden rounded-[1.75rem] border">
-              <div
-                ref={mapElementRef}
-                className={MAP_CONTAINER_CLASSNAME}
-                aria-label="Карта покриття 4Seasons у Голосіївському районі Києва"
-              />
+              <div ref={mapViewportRef}>
+                <div
+                  ref={mapElementRef}
+                  className={MAP_CONTAINER_CLASSNAME}
+                  aria-label="Карта покриття 4Seasons у Голосіївському районі Києва"
+                />
+              </div>
 
               {mapStatus !== "ready" ? (
                 <div className="bg-background/92 absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center backdrop-blur-sm">
@@ -671,14 +713,18 @@ export default function CoverageSection() {
                   </div>
                   <div className="space-y-2">
                     <p className="text-text text-lg font-medium">
-                      {mapStatus === "loading"
-                        ? "Завантажуємо карту покриття"
-                        : "Не вдалося завантажити карту"}
+                      {mapStatus === "idle"
+                        ? "Карта завантажиться автоматично"
+                        : mapStatus === "loading"
+                          ? "Завантажуємо карту покриття"
+                          : "Не вдалося завантажити карту"}
                     </p>
                     <p className="text-text-muted text-sm leading-6">
-                      {mapStatus === "loading"
-                        ? "Мітки з адресами вже підготовлені і з'являться за мить."
-                        : "Список будинків праворуч доступний, навіть якщо карта тимчасово не відкрилася."}
+                      {mapStatus === "idle"
+                        ? "Почнемо завантаження, щойно блок опиниться поруч із зоною перегляду."
+                        : mapStatus === "loading"
+                          ? "Мітки з адресами вже підготовлені і з'являться за мить."
+                          : "Список будинків праворуч доступний, навіть якщо карта тимчасово не відкрилася."}
                     </p>
                   </div>
                 </div>
@@ -695,7 +741,10 @@ export default function CoverageSection() {
                   key={street.id}
                   type="button"
                   aria-pressed={isActive}
-                  onClick={() => setActiveStreetId(street.id)}
+                  onClick={() => {
+                    setShouldLoadMap(true);
+                    setActiveStreetId(street.id);
+                  }}
                   className={`rounded-3xl border p-4 text-left transition ${
                     isActive
                       ? "border-highlight/90 bg-foreground"

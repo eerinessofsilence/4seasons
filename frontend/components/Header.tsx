@@ -300,7 +300,7 @@ export default function Header() {
             </button>
             <a
               type="button"
-              className="border-border bg-secondary/75 hover:text-text text-text-muted hover:bg-secondary hidden cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-medium backdrop-blur-lg transition-colors duration-200 lg:inline-flex"
+              className="border-border bg-secondary/50 hover:text-text-muted text-text hover:bg-secondary hidden cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-medium backdrop-blur-lg transition-colors duration-200 lg:inline-flex"
               aria-label="Особистий кабінет"
               href="https://my.4seasons.net.ua/"
             >
@@ -372,7 +372,7 @@ export default function Header() {
           <a
             type="button"
             tabIndex={mobileTabIndex}
-            className="border-border bg-secondary/75 hover:text-text text-text-muted hover:bg-secondary mt-5 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-3 text-base font-medium backdrop-blur-lg transition-colors duration-200"
+            className="border-border bg-secondary/50 hover:text-text-muted text-text hover:bg-secondary mt-5 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-3 text-base font-medium backdrop-blur-lg transition-colors duration-200"
             onClick={() => closeMobileMenu()}
             href="https://my.4seasons.net.ua/"
           >
