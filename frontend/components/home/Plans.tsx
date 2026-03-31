@@ -324,24 +324,11 @@ function ComparisonTable({
 export default function PlansSection() {
   return (
     <section id="plans" className="space-y-12 p-8 md:p-16 lg:p-24">
-      <div className="flex flex-col gap-3">
-        <div className="max-w-4xl text-pretty">
+      <div className="space-y-6">
+        <div className="flex flex-col gap-3">
           <p className="text-text-muted text-sm font-medium tracking-widest uppercase">
             Тарифи
           </p>
-          <h2 className="text-text mt-4 text-4xl font-semibold sm:text-5xl">
-            Тарифи для квартир і нежитлових приміщень без прихованих дрібниць.
-          </h2>
-        </div>
-        <p className="text-text-muted max-w-3xl leading-7 text-pretty">
-          Зібрали в одному місці домашні та бізнес-тарифи, річну оплату для
-          квартир, додаткові послуги та реальні умови підключення. Без
-          маркетингових пакетів, де головне губиться в дрібному шрифті.
-        </p>
-      </div>
-
-      <div className="space-y-6">
-        <div className="flex flex-col gap-3">
           <h3 className="text-text max-w-2xl text-3xl font-semibold sm:text-4xl">
             Безлімітні тарифи для квартири з оплатою помісячно або за рік.
           </h3>
