@@ -302,7 +302,7 @@ export default function Header() {
               type="button"
               className="border-border bg-secondary/50 hover:text-text-muted text-text hover:bg-secondary hidden cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-medium backdrop-blur-lg transition-colors duration-200 lg:inline-flex"
               aria-label="Особистий кабінет"
-              href="https://my.4seasons.net.ua/"
+              href="/"
             >
               <UserRound className="h-4 w-4" />
               Особистий кабінет
@@ -374,7 +374,7 @@ export default function Header() {
             tabIndex={mobileTabIndex}
             className="border-border bg-secondary/50 hover:text-text-muted text-text hover:bg-secondary mt-5 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border px-4 py-3 text-base font-medium backdrop-blur-lg transition-colors duration-200"
             onClick={() => closeMobileMenu()}
-            href="https://my.4seasons.net.ua/"
+            href="/"
           >
             <UserRound className="h-5 w-5" />
             Особистий кабінет
